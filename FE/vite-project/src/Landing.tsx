@@ -57,14 +57,14 @@ export const SideBar = () =>{
                 <div>
                     <p className="text-gray-400 pb-5">Projects</p>
                     <div className="flex gap-2 pb-3">
-                        <svg className="size-5"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <svg className="size-5"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
                         </svg>
                         <p className="text-sm">All Projects</p>
                     </div>
 
                     <div className="flex gap-2 pb-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <svg className="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                         </svg>
                         <p>Starred</p>
@@ -84,13 +84,35 @@ export const SideBar = () =>{
 
 export const Main = () =>{
     return (
-        <div className="h-screen bg-[radial-gradient(circle_at_50%_100%,#f472b6_0%,#a78bfa_30%,#312e81_65%,#020617_100%)] w-screen flex items-center justify-center">
-           <input 
-                className=" items-start content-start rounded-3xl text-white focus:outline-0 py-10 w-200 bg-neutral-800 outline-none shadow-[inset_0_1px_2px_rgba(255,255,255,0.15)]  "
-                type="text"
-                placeholder="build your portfolio"
-            />
+        <div className="h-screen w-screen flex  flex-col items-center justify-center animated-gradient">
+            {/* top pharse */}
+            <div className="text-3xl mb-12 font-semibold font-sans tracking-wide text-white">
+                What's on your mind, Sanskriti ?
+            </div>
 
+            <div className="relative w-200 flex ">
+                 {/* Input box */}
+                <input 
+                    className="w-full h-24 rounded-4xl text-white px-8 pr-16 bg-neutral-800 outline-none placeholder-gray-400 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15)]"
+                    type="text"
+                    placeholder="Generate a portfolio that gets me hired…."
+                />
+                 {/* ICON */}
+                <svg 
+                    className="absolute right-4 top-1/2 -translate-y-1/2 mx-3 bg-neutral-800 rounded-full  size-6 text-gray-400 "
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                >
+                    <path 
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+                    />
+                </svg>
+            </div>
         </div>
     )
 }
