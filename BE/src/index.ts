@@ -4,9 +4,9 @@ import { SigninSchema, SignupSchema } from "../lib/zod/zod";
 import { prisma } from "./db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
+
 import { refinePrompt } from "../lib/ai/refine";
 import { generateStructuredPortfolio } from "../lib/ai/generate";
-import { success } from "zod";
 
 const JWT_SECRET=process.env.JWT_SECRET||"";
 
@@ -94,6 +94,7 @@ app.post("/signin", async (req:Request, res:Response)=>{
 
         return res.status(200).json({
             success:true,
+            data:token,
             msg:"Successfully SignedUp"
         })
     }catch(e:any){
@@ -104,13 +105,29 @@ app.post("/signin", async (req:Request, res:Response)=>{
     }
 })
 
-const handler =async (req, res)=>{
-    const {userInput} = req.body;
-    const refined= await refinePrompt(userInput);
-    const portfolio= await generateStructuredPortfolio(refined);
+app.post("/generate", async (req:Request, res:Response) => {
+  const { userInput } = req.body;
 
-    return res.status(200).json({
-        success:true,
-        data:portfolio
-    })
-}
+  const refined = await refinePrompt(userInput)
+  const portfolio = await generateStructuredPortfolio(refined)
+
+  return res.status(200).json({
+    success: true,
+    data: portfolio
+  })
+})
+
+app.listen(3000,()=>{
+    console.log("running on port 3000");
+})
+
+
+// frontend code for rendering component
+// const res = await fetch("/generate", {
+//   method: "POST",
+//   headers: { "Content-Type": "application/json" },
+//   body: JSON.stringify({ userInput: "..." })
+// })
+
+// const data = await res.json()
+// <Portfolio data={data.data} />
