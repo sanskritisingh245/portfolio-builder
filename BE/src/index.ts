@@ -17,6 +17,7 @@ app.use(cors());
 app.post("/signup", async (req:Request, res:Response)=>{
     try{
         const{success, data}=SignupSchema.safeParse(req.body);
+        //console.log("bE",req.body);
         if(!success){
             return res.status(400).json({
                 success:false,

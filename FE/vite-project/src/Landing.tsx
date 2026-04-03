@@ -1,4 +1,5 @@
 import { House, Search } from "lucide-react";
+import { use, useState } from "react";
 
 export const Landing = () =>{
     return(
@@ -83,6 +84,21 @@ export const SideBar = () =>{
 
 
 export const Main = () =>{
+    const[input, setInput]=useState("");
+    const[loading, setLoading]=useState(false);
+    async function handleSubmit(){
+        setLoading(true);
+        const res= await fetch("http://localhost:3000/generate",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(input)
+        })    
+    }
+      function handleChange(e:React.ChangeEvent<HTMLInputElement>){
+            setInput(e.target.value)
+        }
     return (
         <div className="h-screen w-screen flex flex-col items-center justify-center animated-gradient">
             {/* top phrase */}
@@ -96,22 +112,25 @@ export const Main = () =>{
                     className="w-full h-24 rounded-4xl text-white px-8 pr-16 bg-neutral-800 outline-none placeholder-gray-400 shadow-[inset_0_1px_2px_rgba(255,255,255,0.15)]"
                     type="text"
                     placeholder="Generate a portfolio that gets me hired…."
+                    onChange={handleChange}
                 />
                  {/* ICON */}
-                <svg
-                    className="absolute right-4 top-1/2 -translate-y-1/2 mx-3 bg-neutral-800 rounded-full  size-6 text-gray-400 "
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
-                    />
-                </svg>
+                <button onClick={handleSubmit}>
+                    <svg
+                        className="absolute right-4 top-1/2 -translate-y-1/2 mx-3 bg-neutral-800 rounded-full  size-6 text-gray-400 "
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18"
+                        />
+                    </svg>
+                </button>
             </div>
         </div>
     )

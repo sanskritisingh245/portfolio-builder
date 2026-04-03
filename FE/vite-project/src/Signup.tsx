@@ -1,8 +1,39 @@
-import { Link } from "react-router-dom";
-import { AuthInput } from "./AuthInput";
-//import { api } from 
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
+    const [ loading, setLoading]=useState(false);
+    const [credentials, setCredentails]=useState({
+        name:"",
+        email:"",
+        password:""
+    })
+    function handleChange(e:React.ChangeEvent<HTMLInputElement>){
+        const{name,value}=e.target;
+        setCredentails({
+            ...credentials,
+            [name]:value
+        })
+    }
+    //console.log(credentials)
+    const navigate=useNavigate();
+    async function handleSignup() {
+        setLoading(true);
+        const res= await fetch("http://localhost:3000/signup",{
+            method:"POST",
+            headers:{
+               "Content-Type": "application/json"
+            },
+            body:JSON.stringify(credentials)
+        })
+        const data = await res.json()
+        console.log(data)
+        if(res.ok){
+            navigate("/signin")
+        }
+       setLoading(false);
+        
+    }
     
   return (
     <div className="flex h-screen w-screen items-center justify-center animated-gradient">
@@ -31,21 +62,48 @@ export const Signup = () => {
 
           {/* Form */}
           <div className="space-y-6">
-            <AuthInput type="text" label="Name" placeholder="Your full name" />
-            <AuthInput
-              type="email"
-              label="Email"
-              placeholder="you@example.com"
-            />
-            <AuthInput
-              type="password"
-              label="Password"
-              placeholder="Min. 8 characters"
-            />
+            <div className="relative pb-px">
+              <label className="block text-[11px] font-medium text-neutral-500 uppercase tracking-wider mb-2.5">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your full name"
+                onChange={handleChange}
+                className="w-full pb-3 bg-transparent border-b border-neutral-800 text-white text-sm placeholder-neutral-600 outline-none caret-white focus:border-neutral-400 transition-colors"
+              />
+            </div>
+
+            <div className="relative pb-px">
+              <label className="block text-[11px] font-medium text-neutral-500 uppercase tracking-wider mb-2.5">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                onChange={handleChange}
+                className="w-full pb-3 bg-transparent border-b border-neutral-800 text-white text-sm placeholder-neutral-600 outline-none caret-white focus:border-neutral-400 transition-colors"
+              />
+            </div>
+
+            <div className="relative pb-px">
+              <label className="block text-[11px] font-medium text-neutral-500 uppercase tracking-wider mb-2.5">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Min. 8 characters"
+                onChange={handleChange}
+                className="w-full pb-3 bg-transparent border-b border-neutral-800 text-white text-sm placeholder-neutral-600 outline-none caret-white focus:border-neutral-400 transition-colors"
+              />
+            </div>
 
             {/* Submit */}
             <button className="btn-glow group w-full h-10 mt-2 flex items-center justify-center gap-2 bg-white text-black text-sm font-semibold rounded-full active:scale-[0.97] cursor-pointer"
-                // onClick={handleSignup}
+                    onClick={handleSignup}
             >
               Create account
               <svg
@@ -61,7 +119,6 @@ export const Signup = () => {
                   d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
                 />
               </svg>
-              
             </button>
           </div>
 
@@ -94,17 +151,18 @@ export const Signup = () => {
           </div>
 
           {/* Footer */}
-          <p className="mt-6 text-center text-neutral-600 text-[11px]">
-            Have an account?{" "}
-            <Link
-              to="/signin"
-              className="text-neutral-400 hover:text-white transition-colors"
-            >
-              Sign in
-            </Link>
-          </p>
+            <div className="mt-6 text-center text-neutral-600 text-[11px]">
+                 Already signed up?
+                <Link
+                    to="/signin"
+                    className="text-purple-300 hover:text-purple-200 underline cursor-pointer"
+                >
+                    signin
+                </Link>
+            </div>
         </div>
       </div>
     </div>
   );
 };
+

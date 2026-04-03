@@ -1,7 +1,38 @@
-import { Link } from "react-router-dom";
-import { AuthInput } from "./AuthInput";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SignIn = () => {
+    const[loading, setLoading]=useState(false);
+    const[credentials, setCredentails]=useState({
+        email:"",
+        password:""
+    })
+    function handleChange(e:React.ChangeEvent<HTMLInputElement>){
+        const{name, value}=e.target;
+        setCredentails({
+            ...credentials,
+            [name]:value
+        })
+
+    }
+    const navigate=useNavigate();
+    async function handleSignin(){
+        setLoading(true);
+        const res= await fetch("http://localhost:3000/signin",{
+            method:"POST",
+            headers:{
+                "content-Type":"application/json"
+            },
+            body:JSON.stringify(credentials)
+        })
+        const data=await res.json();
+        console.log(data);
+        if(res.ok){
+            navigate("/landing")
+        }
+        setLoading(false);
+        
+    }
   return (
     <div className="flex h-screen w-screen items-center justify-center animated-gradient">
       <div className="w-full max-w-sm relative animate-card-in">
@@ -29,20 +60,41 @@ export const SignIn = () => {
 
           {/* Form */}
           <div className="space-y-6">
-            <AuthInput
-              type="email"
-              label="Email"
-              placeholder="you@example.com"
-            />
-            <AuthInput
-              type="password"
-              label="Password"
-              placeholder="Enter your password"
-              rightLabel="Forgot?"
-            />
+            <div className="relative pb-px">
+              <label className="block text-[11px] font-medium text-neutral-500 uppercase tracking-wider mb-2.5">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                onChange={handleChange}
+                className="w-full pb-3 bg-transparent border-b border-neutral-800 text-white text-sm placeholder-neutral-600 outline-none caret-white focus:border-neutral-400 transition-colors"
+              />
+            </div>
+
+            <div className="relative pb-px">
+              <div className="flex items-center justify-between mb-2.5">
+                <label className="block text-[11px] font-medium text-neutral-500 uppercase tracking-wider">
+                  Password
+                </label>
+                <span className="text-[11px] text-neutral-600 cursor-pointer hover:text-neutral-300 transition-colors">
+                  Forgot?
+                </span>
+              </div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                onChange={handleChange}
+                className="w-full pb-3 bg-transparent border-b border-neutral-800 text-white text-sm placeholder-neutral-600 outline-none caret-white focus:border-neutral-400 transition-colors"
+              />
+            </div>
 
             {/* Submit */}
-            <button className="btn-glow group w-full h-10 mt-2 flex items-center justify-center gap-2 bg-white text-black text-sm font-semibold rounded-full active:scale-[0.97] cursor-pointer">
+            <button className="btn-glow group w-full h-10 mt-2 flex items-center justify-center gap-2 bg-white text-black text-sm font-semibold rounded-full active:scale-[0.97] cursor-pointer"
+                    onClick={handleSignin}
+            >
               Sign in
               <svg
                 className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5"
