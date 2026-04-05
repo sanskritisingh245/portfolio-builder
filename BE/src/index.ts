@@ -5,6 +5,11 @@ import { prisma } from "./db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 
+import dotenv from "dotenv"
+dotenv.config({
+    path: "../.env"  
+})
+
 import { refinePrompt } from "../lib/ai/refine";
 import { generateStructuredPortfolio } from "../lib/ai/generate";
 
@@ -12,7 +17,11 @@ const JWT_SECRET=process.env.JWT_SECRET||"";
 
 const app= express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST"],
+  credentials: true
+}))
 
 app.post("/signup", async (req:Request, res:Response)=>{
     try{
@@ -107,28 +116,24 @@ app.post("/signin", async (req:Request, res:Response)=>{
 })
 
 app.post("/generate", async (req:Request, res:Response) => {
-  const { userInput } = req.body;
-
-  const refined = await refinePrompt(userInput)
-  const portfolio = await generateStructuredPortfolio(refined)
-
-  return res.status(200).json({
-    success: true,
-    data: portfolio
-  })
+    try{
+        const { userInput } = req.body;
+      
+        const refined = await refinePrompt(userInput)
+        const portfolio = await generateStructuredPortfolio(refined)
+      
+        return res.status(200).json({
+          success: true,
+            code:portfolio
+        })
+    }catch(e:any){
+        return res.status(500).json({
+            success:false,
+            msg:e.message ||"Internal Server Error"
+        })
+    }
 })
 
 app.listen(3000,()=>{
     console.log("running on port 3000");
 })
-
-
-// frontend code for rendering component
-// const res = await fetch("/generate", {
-//   method: "POST",
-//   headers: { "Content-Type": "application/json" },
-//   body: JSON.stringify({ userInput: "..." })
-// })
-
-// const data = await res.json()
-// <Portfolio data={data.data} />

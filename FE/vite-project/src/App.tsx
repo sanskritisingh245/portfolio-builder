@@ -7,12 +7,12 @@ import { Preview } from './preview';
 
 function App() {
   return (
-    //<Preview/>
     <BrowserRouter>
       <Routes>
           <Route path="/signup" element={<Signup/> }/>
           <Route path="/signin" element={<SignIn/>}/>
           <Route path="/landing" element={<Landing/>}/>
+          <Route path="/preview" element={<Preview/>}/>
       </Routes>
     </BrowserRouter>
   )

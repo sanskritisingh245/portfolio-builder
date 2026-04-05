@@ -1,5 +1,6 @@
 import { House, Search } from "lucide-react";
-import { use, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Landing = () =>{
     return(
@@ -86,19 +87,33 @@ export const SideBar = () =>{
 export const Main = () =>{
     const[input, setInput]=useState("");
     const[loading, setLoading]=useState(false);
+    const navigate= useNavigate();
+
     async function handleSubmit(){
+        alert("button was clicked")
         setLoading(true);
         const res= await fetch("http://localhost:3000/generate",{
             method:"POST",
             headers:{
                 "Content-Type": "application/json"
             },
-            body:JSON.stringify(input)
-        })    
+            body:JSON.stringify({
+                userInput:input
+            })
+        }) 
+        const data = await res.json()
+        console.log(data)
+        if(res.ok){
+            navigate("/preview",{
+                state: data.code 
+            })
+        }   
     }
-      function handleChange(e:React.ChangeEvent<HTMLInputElement>){
-            setInput(e.target.value)
-        }
+
+    function handleChange(e:React.ChangeEvent<HTMLInputElement>){
+        setInput(e.target.value)
+    }
+
     return (
         <div className="h-screen w-screen flex flex-col items-center justify-center animated-gradient">
             {/* top phrase */}
