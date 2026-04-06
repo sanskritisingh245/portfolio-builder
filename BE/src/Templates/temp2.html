@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture / Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Syne:wght@800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0d;
+            --text: #e0e0e0;
+            --accent: #ff4d00; 
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Essential Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; } 
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Modern Custom Cursor */
+        #cursor {
+            width: 20px; height: 20px; background: var(--accent);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; mix-blend-mode: difference; transition: transform 0.1s ease-out;
+        }
+
+        .container { padding: 0 5vw; }
+
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            line-height: 0.8;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-sub {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-top: 2rem;
+        }
+
+        .role-tag {
+            font-size: 1.2rem; border-left: 4px solid var(--accent);
+            padding-left: 1rem; text-transform: uppercase; font-weight: 700;
+        }
+
+        /* --- SKILLS GRID --- */
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px;
+        }
+
+        .skill-box {
+            background: var(--glass); padding: 3rem;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
+        }
+
+        .skill-box:hover { background: var(--accent); color: #000; transform: translateY(-10px); }
+        .skill-box h3 { font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem; opacity: 0.6; }
+        .skill-box p { font-size: 1.5rem; font-weight: 700; }
+
+        /* --- PROJECTS --- */
+        .project-row {
+            display: flex; border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 4rem 0; text-decoration: none; color: inherit; transition: 0.5s ease;
+        }
+
+        .project-row:hover { background: #151515; padding-left: 2rem; }
+        .p-num { font-size: 1rem; width: 10%; color: var(--accent); font-weight: bold; }
+        .p-title { width: 40%; font-family: 'Syne', sans-serif; font-size: 3rem; }
+        .p-desc { width: 35%; font-size: 1.1rem; opacity: 0.7; padding-right: 2rem; }
+        .p-tech { width: 15%; font-family: monospace; font-size: 0.8rem; text-align: right; }
+
+        /* Progress Bar */
+        #progress {
+            position: fixed; top: 0; left: 0; height: 4px; background: var(--accent);
+            z-index: 1000; width: 0%;
+        }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        footer { padding: 5vh 0; display: flex; justify-content: space-between; opacity: 0.4; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+    <div id="progress"></div>
+
+    <div class="container">
+        <header>
+            <section>
+                <div class="hero-title">FULL<br><span style="color:var(--accent)">NAME</span></div>
+                <div class="hero-sub">
+                    <div class="role-tag">Staff Frontend Engineer /<br>Creative Technologist</div>
+                    <div style="text-align: right; opacity: 0.5;">Available: Q3 2026<br>Based in [Location]</div>
+                </div>
+            </section>
+        </header>
+
+        <section class="reveal">
+            <h2 style="font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem; color: var(--accent);">01 — Technical Ledger</h2>
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <h3>Languages</h3>
+                    <p>TypeScript, Go, Python, GLSL</p>
+                </div>
+                <div class="skill-box">
+                    <h3>Frameworks</h3>
+                    <p>React, Next.js, Framer Motion, Three.js</p>
+                </div>
+                <div class="skill-box">
+                    <h3>Environment</h3>
+                    <p>Docker, AWS, Vercel, Git Architecture</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2 style="font-size: 0.8rem; text-transform: uppercase; margin-bottom: 2rem; color: var(--accent);">02 — Selected Works</h2>
+            
+            <a href="#" class="project-row">
+                <div class="p-num">/ 01</div>
+                <div class="p-title">SYNTH-UI</div>
+                <div class="p-desc">Design systems that dynamically adjust contrast via ambient sensors.</div>
+                <div class="p-tech">React • Web Sensors</div>
+            </a>
+
+            <a href="#" class="project-row">
+                <div class="p-num">/ 02</div>
+                <div class="p-title">CORE-SYNC</div>
+                <div class="p-desc">Data visualizer handling 100k+ real-time events.</div>
+                <div class="p-tech">D3.js • Web Workers</div>
+            </a>
+        </section>
+
+        <section class="reveal">
+            <h1 class="hero-title" style="font-size: 8vw;">Let's Talk.</h1>
+            <div class="hero-sub" style="justify-content: flex-start; gap: 4rem;">
+                <a href="#" style="color:var(--accent); font-weight:bold; text-decoration:none;">EMAIL</a>
+                <a href="#" style="color:var(--text); text-decoration:none;">GITHUB</a>
+                <a href="#" style="color:var(--text); text-decoration:none;">LINKEDIN</a>
+            </div>
+        </section>
+
+        <footer>
+            <span>v.2026.04</span>
+            <span>Hand-Coded Implementation</span>
+        </footer>
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        window.addEventListener('mousemove', e => {
+            cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        });
+
+        // Intersection Observer for Reveal (Better than standard scroll logic)
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Progress Bar
+        window.onscroll = function() {
+            let winScroll = document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("progress").style.width = scrolled + "%";
+        };
+    </script>
+</body>
+</html>

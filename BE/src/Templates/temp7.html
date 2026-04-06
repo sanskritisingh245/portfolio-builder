@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[NAME] // MULTI_NODE_MAP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fffdf9;
+            --blue: #00d1ff;
+            --pink: #ff4dcc;
+            --yellow: #ffda00;
+            --ink: #1a1a1a;
+            --line: rgba(26, 26, 26, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Bricolage Grotesque', sans-serif; 
+            background: var(--bg); 
+            color: var(--ink);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 209, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 77, 204, 0.05) 0%, transparent 40%);
+        }
+
+        /* --- THE MIND MAP CANVAS --- */
+        .canvas {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 30px;
+            padding: 100px 5vw;
+            max-width: 1500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Structural lines connecting nodes */
+        .connection-path {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- NODE STYLING --- */
+        .node {
+            padding: 40px;
+            border: 3px solid var(--ink);
+            background: #fff;
+            position: relative;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* "Offset Ink" Shadow Effect */
+        .node::after {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px;
+            width: 100%; height: 100%;
+            z-index: -1;
+            transition: 0.3s;
+        }
+
+        .node:hover { transform: translate(-4px, -4px); }
+        .node:hover::after { top: 15px; left: 15px; }
+
+        /* --- SPECIFIC NODES --- */
+        .core-node {
+            grid-column: 1 / span 7;
+            border-radius: 60px 0 60px 0;
+            background: var(--blue);
+        }
+        .core-node::after { background: var(--pink); opacity: 0.3; }
+        .core-node h1 { font-size: clamp(3rem, 10vw, 6rem); line-height: 0.85; text-transform: uppercase; }
+
+        .toolkit-node {
+            grid-column: 9 / span 4;
+            align-self: center;
+            background: var(--yellow);
+            transform: rotate(2deg);
+        }
+        .toolkit-node::after { background: var(--blue); opacity: 0.4; }
+
+        .project-node-1 {
+            grid-column: 1 / span 6;
+            margin-top: 50px;
+            background: #fff;
+        }
+        .project-node-1::after { background: var(--blue); opacity: 0.5; }
+
+        .project-node-2 {
+            grid-column: 7 / span 6;
+            margin-top: 120px;
+            background: #fff;
+        }
+        .project-node-2::after { background: var(--yellow); opacity: 0.5; }
+
+        /* --- TYPOGRAPHY --- */
+        .label { font-family: 'Space Mono', monospace; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; display: block;}
+        .p-name { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; }
+        .p-desc { font-size: 1.1rem; line-height: 1.4; color: rgba(26,26,26,0.8); }
+        
+        .skill-chip {
+            display: inline-block;
+            background: var(--ink);
+            color: #fff;
+            padding: 4px 10px;
+            font-family: 'Space Mono';
+            font-size: 0.7rem;
+            margin: 0 5px 5px 0;
+        }
+
+        /* --- CONTACT HUB --- */
+        .contact-node {
+            grid-column: 4 / span 6;
+            margin-top: 100px;
+            background: var(--pink);
+            color: #fff;
+            text-align: center;
+        }
+        .contact-node::after { background: var(--ink); opacity: 0.2; }
+        .contact-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 20px;
+            transition: 0.2s;
+        }
+        .contact-links a:hover { color: var(--yellow); }
+
+        @media (max-width: 900px) {
+            .core-node, .toolkit-node, .project-node-1, .project-node-2, .contact-node {
+                grid-column: 1 / span 12;
+                margin-top: 20px !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="canvas">
+        <header class="node core-node">
+            <span class="label">// ROOT_NODE</span>
+            <h1>Your Full Name</h1>
+            <p style="margin-top: 20px; font-weight: 300; font-size: 1.4rem; font-style: italic;">Lead Full-Stack Developer & Tech Architect</p>
+        </header>
+
+        <section class="node toolkit-node">
+            <span class="label">Primary_Stack</span>
+            <div style="margin-top: 20px;">
+                <span class="skill-chip">TypeScript</span>
+                <span class="skill-chip">Python</span>
+                <span class="skill-chip">Go</span>
+                <span class="skill-chip">Next.js</span>
+                <span class="skill-chip">AWS</span>
+                <span class="skill-chip">PostgreSQL</span>
+                <span class="skill-chip">Docker</span>
+            </div>
+        </section>
+
+        <div class="node project-node-1">
+            <span class="label">Project_01 // FINTECH</span>
+            <h3 class="p-name">OmniSync</h3>
+            <p class="p-desc">High-concurrency data bridge that solved state-drift issues for 2M+ daily active users.</p>
+            <p style="margin-top: 20px; font-family: 'Space Mono'; font-size: 0.7rem;">GO • REDIS • WS</p>
+        </div>
+
+        <div class="node project-node-2">
+            <span class="label">Project_02 // AI_UI</span>
+            <h3 class="p-name">Neural Mesh</h3>
+            <p class="p-desc">Interactive WebGL dashboard for auditing neural network weights in real-time.</p>
+            <p style="margin-top: 20px; font-family: 'Space Mono'; font-size: 0.7rem;">THREE.JS • REACT • PYTORCH</p>
+        </div>
+
+        <footer class="node contact-node">
+            <span class="label" style="color: #fff;">ESTABLISH_CONNECTION</span>
+            <div class="contact-links" style="margin-top: 20px;">
+                <a href="#">EMAIL</a>
+                <a href="#">GH</a>
+                <a href="#">LI</a>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

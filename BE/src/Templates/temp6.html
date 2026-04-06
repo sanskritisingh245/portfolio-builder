@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[NAME] // NEURAL_MAP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #040d0a; /* Deep forest/emerald black */
+            --node-bg: #0a1a15;
+            --accent: #b9ff66; /* Electric Lime */
+            --line: rgba(185, 255, 102, 0.2);
+            --text-main: #f0f5f0;
+            --text-muted: #6a8070;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Bricolage Grotesque', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: radial-gradient(var(--line) 1px, transparent 1px);
+            background-size: 40px 40px; /* Grid paper effect */
+        }
+
+        .map-wrapper {
+            position: relative;
+            padding: 100px 5vw;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        /* --- THE CONNECTORS (Visual lines) --- */
+        .line-v { position: absolute; background: var(--line); width: 2px; z-index: -1; }
+        .line-h { position: absolute; background: var(--line); height: 2px; z-index: -1; }
+
+        /* --- NODES --- */
+        .node {
+            background: var(--node-bg);
+            border: 1px solid var(--line);
+            padding: 30px;
+            position: relative;
+            transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .node:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(185, 255, 102, 0.1);
+        }
+
+        /* --- CENTRAL CORE (Identity) --- */
+        .core {
+            grid-column: 1 / span 7;
+            padding: 60px;
+            border-radius: 0 100px 0 0;
+            background: linear-gradient(135deg, var(--node-bg) 0%, transparent 100%);
+        }
+        .core h1 { font-size: clamp(3rem, 10vw, 7rem); line-height: 0.9; text-transform: uppercase; margin-bottom: 20px; }
+        .core .role { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1.2rem; }
+
+        /* --- SKILLS BRANCH --- */
+        .skills-branch {
+            grid-column: 9 / span 4;
+            align-self: start;
+        }
+        .skills-branch h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 20px; }
+        .skill-tag { 
+            display: inline-block; 
+            font-family: 'JetBrains Mono'; 
+            font-size: 0.85rem; 
+            padding: 5px 12px; 
+            margin: 0 5px 10px 0;
+            background: rgba(185, 255, 102, 0.05);
+            border: 1px solid var(--line);
+        }
+
+        /* --- PROJECT NODES --- */
+        .projects-header {
+            grid-column: 1 / span 12;
+            margin: 100px 0 40px;
+            font-size: 3rem;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .project-node {
+            grid-column: span 6;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .project-node::before {
+            content: 'SOLVED //';
+            font-family: 'JetBrains Mono';
+            font-size: 0.7rem;
+            color: var(--accent);
+        }
+
+        .p-title { font-size: 2rem; margin: 15px 0; }
+        .p-desc { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 20px; }
+        .p-stack { font-family: 'JetBrains Mono'; font-size: 0.75rem; opacity: 0.6; }
+
+        /* --- CONTACT HUB --- */
+        .contact-node {
+            grid-column: 8 / span 5;
+            margin-top: 100px;
+            border-left: 5px solid var(--accent);
+        }
+        .contact-links a {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+        .contact-links a:hover { color: var(--accent); padding-left: 20px; transition: 0.3s; }
+
+        @media (max-width: 768px) {
+            .core, .skills-branch, .project-node, .contact-node { grid-column: 1 / span 12; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="line-v" style="height: 100vh; left: 50%; top: 0;"></div>
+    <div class="line-h" style="width: 100vw; top: 500px; left: 0;"></div>
+
+    <div class="map-wrapper">
+        
+        <header class="node core">
+            <p style="font-family: 'JetBrains Mono'; font-size: 0.7rem; margin-bottom: 10px;">[ SUBJECT_01 ]</p>
+            <h1>YOUR<br>FULL NAME</h1>
+            <p class="role">Staff ML Engineer & Technical Architect</p>
+        </header>
+
+        <section class="node skills-branch">
+            <h3>Cognitive Toolkit</h3>
+            <div style="margin-bottom: 20px;">
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">LANGUAGES</p>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Rust</span>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">FRAMEWORKS</p>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Next.js</span>
+            </div>
+            <div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">INFRA</p>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Kubernetes</span>
+            </div>
+        </section>
+
+        <h2 class="projects-header">Problem_Solving_Nodes</h2>
+
+        <div class="node project-node">
+            <div>
+                <h3 class="p-title">NeuralShield AI</h3>
+                <p class="p-desc">Developed a real-time fraud detection engine that identifies synthetic identity patterns, reducing financial leak by 22%.</p>
+            </div>
+            <div class="p-stack">STACK // PYTHON • TENSORFLOW • REDIS</div>
+        </div>
+
+        <div class="node project-node">
+            <div>
+                <h3 class="p-title">CloudGraph</h3>
+                <p class="p-desc">Built a visualization tool for complex AWS architectures to solve "orphaned resource" debt for dev teams.</p>
+            </div>
+            <div class="p-stack">STACK // REACT • THREE.JS • AWS_SDK</div>
+        </div>
+
+        <footer class="node contact-node">
+            <h3 style="margin-bottom: 20px; color: var(--accent);">EXTERNAL_LINKS</h3>
+            <div class="contact-links">
+                <a href="#">GITHUB</a>
+                <a href="#">LINKEDIN</a>
+                <a href="mailto:you@mindmap.dev">EMAIL</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

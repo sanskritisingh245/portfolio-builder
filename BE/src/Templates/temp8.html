@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Impact // [YOUR NAME]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39&family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #ffffff;
+            --paper-off-white: #fdfdfd; 
+            --ink-black: #000000;
+            --brand-red: #cc0000;
+            --border-muted: #e0e0e0;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* --- GLOBAL RESETS & INTERACTIVE FEEL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; } /* Industrial Crosshair cursor */
+        
+        body { 
+            background: var(--bg-canvas); 
+            font-family: 'Space Mono', monospace; 
+            color: var(--ink-black); 
+            padding: 60px 20px;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            /* Static Nebula backdrop (reference image motion) */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(204, 0, 0, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 0, 0, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .terminal-layout { max-width: 1000px; margin: 0 auto; position: relative; }
+
+        /* --- DYNAMIC PARALLAX BLOBS (Reference Image Motion) --- */
+        .parallax-blob {
+            position: fixed; width: 400px; height: 400px; border-radius: 50%;
+            z-index: -10; opacity: 0.15; filter: blur(100px);
+            animation: drift 20s infinite alternate;
+        }
+        .blob-red { background: var(--brand-red); top: 10%; left: 0; }
+        .blob-black { background: var(--ink-black); bottom: 10%; right: 0; animation-delay: -5s;}
+        
+        @keyframes drift {
+            0% { transform: translate(-10%, -10%); }
+            100% { transform: translate(10%, 10%); }
+        }
+
+        /* --- DYNAMIC TICKET // Radar Glow & Hover Lift --- */
+        .boarding-pass, .luggage-tag {
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .boarding-pass:hover, .luggage-tag:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--brand-red);
+            box-shadow: 0 25px 50px rgba(204, 0, 0, 0.15); /* Radar lock glow */
+        }
+
+        /* Fixed elements from reference image */
+        .boarding-pass { background: var(--paper-off-white); display: flex; border-radius: 20px; overflow: hidden; border: 2px solid var(--ink-black); margin-bottom: 50px; }
+        .pass-main { flex: 3; padding: 40px; border-right: 2px dashed var(--border-muted); position: relative; }
+        .pass-stub { flex: 1; padding: 40px; background: #fff; display: flex; flex-direction: column; justify-content: space-between; text-align: center; }
+
+        /* Perforation Notches from original design */
+        .boarding-pass::before, .boarding-pass::after {
+            content: ''; position: absolute; width: 40px; height: 40px; background: var(--bg-canvas); border-radius: 50%; left: calc(75% - 20px); z-index: 10; border: 2px solid var(--ink-black);
+        }
+        .boarding-pass::before { top: -22px; }
+        .boarding-pass::after { bottom: -22px; }
+
+        /* --- DYNAMIC TYPEWRITER EFFECT (Your Name) --- */
+        .hero-name { 
+            font-family: 'Bebas Neue', cursive; font-size: 5rem; line-height: 0.8; 
+            color: var(--ink-black); margin-bottom: 20px; letter-spacing: 2px;
+            white-space: nowrap; overflow: hidden; width: 0; /* Starts hidden */
+            animation: typewriter 2s steps(15) 1s forwards; /* Automatic typing */
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* --- LUGGAGE TAGS --- */
+        .cargo-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .luggage-tag { background: #fff; padding: 30px; border-top: 15px solid var(--ink-black); transition: var(--transition); }
+        .luggage-tag:hover { border-top-color: var(--brand-red); }
+
+        /* FIXED: Interactive Circle (from reference image log) */
+        .a-circle {
+            position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; background: #fff; 
+            border: 3px solid var(--ink-black); border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            text-decoration: none; color: var(--ink-black); font-size: 0.8rem; font-weight: bold; 
+            transition: var(--transition); z-index: 100;
+        }
+        .a-circle:hover { background: var(--brand-red); border-color: var(--brand-red); color: #fff; transform: scale(1.1); box-shadow: 0 0 15px rgba(204, 0, 0, 0.3); }
+
+        /* --- TYPOGRAPHY --- */
+        .label { font-size: 0.7rem; text-transform: uppercase; color: #fff; font-weight: 700; display: block; background: var(--ink-black); padding: 2px 6px; width: fit-content; letter-spacing: 1px;}
+        .barcode { font-family: 'Libre Barcode 39', cursive; font-size: 3.5rem; color: var(--brand-red); opacity: 0.6; transition: 0.3s; }
+        .node:hover .barcode { opacity: 1; color: var(--brand-red); filter: drop-shadow(0 0 10px rgba(204, 0, 0, 0.5));}
+
+        /* --- CONTACT HUB (Checkout) --- */
+        footer { margin-top: 80px; background: var(--ink-black); color: #fff; padding: 40px; border-radius: 10px; transition: var(--transition); }
+        footer:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);}
+        
+        .btn-link {
+            display: inline-block; padding: 10px 22px; background: #fff; color: #000; 
+            text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; transition: var(--transition);
+        }
+        .btn-link:hover { background: var(--brand-red); color: #fff; box-shadow: 0 0 20px rgba(204, 0, 0, 0.5); transform: scale(1.05);}
+    </style>
+</head>
+<body>
+
+    <div class="parallax-blob blob-red"></div>
+    <div class="parallax-blob blob-black"></div>
+
+    <div class="terminal-layout">
+        
+        <header class="boarding-pass node">
+            <div class="pass-main">
+                <span class="label">PASSENGER ID // ENGINEERING</span>
+                <h1 class="hero-name">[Your Full Name]</h1>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 15px;">
+                    <div>
+                        <span class="label">ASSIGNED ROLE</span>
+                        <p style="font-weight: 700; font-size: 1.2rem; color: var(--ink-black);">Lead Frontend Engineer</p>
+                    </div>
+                    <div>
+                        <span class="label">DESTINATION</span>
+                        <p style="font-weight: 700; font-size: 1.2rem; color: var(--ink-black);">Core_System_Hub</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <span class="label">TECHNICAL SKILLS MANIFEST</span>
+                    <p style="color:var(--brand-red); font-size: 0.9rem; margin-top: 10px;">React • Next.js • TypeScript • Go • Node.js • FastAPI</p>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">Cloud Architecture / Kubernetes / Docker</p>
+                </div>
+            </div>
+            
+            <div class="pass-stub">
+                <div>
+                    <span class="label">FLIGHT</span>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--ink-black);">QR-2026.04</p>
+                </div>
+                <div>
+                    <span class="label">GATE</span>
+                    <p style="font-size: 1.5rem; font-weight: 700;">H16</p>
+                </div>
+                <div class="barcode">NAME</div>
+                <p style="font-size: 0.6rem; opacity: 0.5;">BOARDING GROUP A</p>
+            </div>
+        </header>
+
+        <h2 style="font-family: 'Bebas Neue'; font-size: 3rem; margin-bottom: 30px; letter-spacing: 2px; color: var(--ink-black);">CHECKED_CARGO // SELECTED_WORKS</h2>
+        
+        <div class="cargo-section">
+            
+            <div class="luggage-tag node">
+                <span class="label">ITEM_01 // SYSTEM_SYNC</span>
+                <h3 style="font-size: 2rem; margin-bottom: 10px; font-weight: 800; color:var(--ink-black)">OmniSync</h3>
+                <p style="font-size: 1rem; color: #333; line-height: 1.5; margin-bottom: 30px;">
+                    Real-time state engine resolving distributed data conflicts for high-concurrency systems.
+                </p>
+                <div style="font-family: 'Space Mono'; font-size: 0.7rem; color: #fff; background: #000; padding: 4px 10px; width: fit-content;">
+                    <strong>TAGS:</strong> GO • REDIS • WS
+                </div>
+            </div>
+
+            <div class="luggage-tag node" style="position: relative;">
+                <span class="label">ITEM_02 // VISUAL_LOG</span>
+                <h3 style="font-size: 2rem; margin-bottom: 10px; font-weight: 800; color:var(--ink-black)">Neural Mesh</h3>
+                <p style="font-size: 1rem; color: #333; line-height: 1.5; margin-bottom: 30px;">
+                    3D observability dashboard used to audit machine learning model weights in production.
+                </p>
+                <div style="font-family: 'Space Mono'; font-size: 0.7rem; color: #fff; background: #000; padding: 4px 10px; width: fit-content;">
+                    <strong>TAGS:</strong> THREE.JS • REACT • PYTORCH
+                </div>
+                
+                <a href="#" class="a-circle">LOG</a>
+            </div>
+
+        </div>
+
+        <footer>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2 style="font-family: 'Bebas Neue'; font-size: 2.5rem; color: #fff;">Connect to Terminal?</h2>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">Deployment-ready for high-impact engineering cycles.</p>
+                </div>
+                <div style="text-align: right;">
+                    <a href="mailto:you@flight.dev" class="btn-link">EMAIL_TRANS</a>
+                    <a href="#" class="btn-link" style="margin-left: 10px; border: 1px solid #fff; background: transparent; color: #fff;">GITHUB_LOG</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

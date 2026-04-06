@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glass Horizon // [YOUR NAME]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Glass Colors */
+            --glass-bg: rgba(255, 255, 255, 0.45); /* High translucency */
+            --glass-border: rgba(255, 255, 255, 0.4); /* Edge highlight */
+            --text-dark: #0f172a;
+            --accent-red: #ff3333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #0f172a; /* Deep space background */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- VIBRANT BACKGROUND BLOBS --- */
+        /* Glassmorphism requires these to be visible through the "glass" */
+        .blob {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(80px);
+            animation: move 20s infinite alternate;
+        }
+        .blob-1 { background: #ff3333; top: -10%; left: -10%; opacity: 0.4; }
+        .blob-2 { background: #3388ff; bottom: -10%; right: -10%; opacity: 0.3; animation-delay: -5s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(100px, 100px); }
+        }
+
+        /* --- THE GLASS CONTAINER --- */
+        .glass-card {
+            max-width: 900px;
+            width: 100%;
+            background: var(--glass-bg);
+            /* CRITICAL GLASS PROPERTY */
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 60px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            color: var(--text-dark);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: scale(1.01);
+        }
+
+        /* --- CONTENT STYLING --- */
+        .header { margin-bottom: 50px; }
+        .header h1 { font-size: 4rem; font-weight: 800; letter-spacing: -2px; line-height: 1; }
+        .role { 
+            font-family: 'Space Mono', monospace; 
+            color: var(--accent-red); 
+            text-transform: uppercase; 
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+
+        .section-title { font-size: 0.7rem; text-transform: uppercase; opacity: 0.5; margin-bottom: 15px; display: block; letter-spacing: 2px;}
+
+        .skill-tag {
+            display: inline-block;
+            background: rgba(15, 23, 42, 0.05);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin: 0 5px 10px 0;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+
+        .project {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+        .project:hover { background: rgba(255, 255, 255, 0.4); }
+
+        .btn-contact {
+            margin-top: 40px;
+            display: inline-block;
+            background: var(--text-dark);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-contact:hover { background: var(--accent-red); transform: translateY(-3px); }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <main class="glass-card">
+        <header class="header">
+            <span class="section-title">Verified Identity</span>
+            <h1>Your Full Name</h1>
+            <span class="role">Lead Full-Stack Developer</span>
+        </header>
+
+        <div class="grid">
+            <section>
+                <span class="section-title">Technical Cargo</span>
+                <div>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Go</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Docker</span>
+                </div>
+            </section>
+
+            <section>
+                <span class="section-title">Selected Missions</span>
+                <div class="project">
+                    <h3 style="margin-bottom: 8px;">OmniSync</h3>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">Real-time state engine resolving data conflicts for 50k+ users.</p>
+                </div>
+                <div class="project">
+                    <h3 style="margin-bottom: 8px;">Neural Mesh</h3>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">3D observability dashboard for auditing ML model weights.</p>
+                </div>
+            </section>
+        </div>
+
+        <a href="mailto:hello@dev.com" class="btn-contact">Initiate Connection</a>
+    </main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[YOUR NAME] // NEURAL_MAP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* INTERSTELLAR_GLASS_PALETTE (from your reference images) */
+            --bg-deep: #05060f; /* Space Black */
+            --glass-bg: rgba(255, 255, 255, 0.04); /* Frosted effect */
+            --glass-border: rgba(255, 255, 255, 0.1); /*Spec Highlight */
+            
+            /* NEBULA_BLOOM */
+            --blue: #2355ff;
+            --orange: #ff5522;
+            --yellow: #ffda00; /* For skills alerts */
+            
+            /* TYPE */
+            --text-main: #ffffff;
+            --text-dim: #717171;
+            --mono: 'Space Mono', monospace;
+            --sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* --- GLOBAL RESETS & CANVAS Setup --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+        
+        body { 
+            background: var(--bg-deep); 
+            font-family: var(--sans); 
+            color: var(--text-main); 
+            overflow: hidden; /* Canvas shouldn't scroll vertically */
+            perspective: 1000px; /* Essential for Glassmorphism depth */
+        }
+
+        .mind-map-canvas {
+            width: 100vw; height: 100vh;
+            position: relative;
+            /* Scroll paper effect for depth */
+            background-image: radial-gradient(var(--glass-border) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* --- NEBULA NODES (Blurred background shapes) --- */
+        .nebula {
+            position: fixed; width: 600px; height: 600px; border-radius: 50%;
+            z-index: -1; opacity: 0.1; filter: blur(100px);
+            animation: move-nebula 30s infinite alternate;
+        }
+        .nebula-blue { background: var(--blue); top: -10%; left: -10%; }
+        .nebula-orange { background: var(--orange); bottom: -10%; right: -10%; animation-delay: -10s; }
+        
+        @keyframes move-nebula { 0% { transform: translate(0, 0); } 100% { transform: translate(10%, 10%); } }
+
+        /* --- THE NODES (Floating Glass Cards) --- */
+        .node {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            position: absolute;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* DYNAMIC INTERACTION: The "Lift" */
+        .node:hover {
+            transform: translateY(-8px) scale(1.02) rotateX(2deg);
+            border-color: #fff;
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.05); /* spec highlight glow */
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .label { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); margin-bottom: 5px; display: block;}
+        .p-name { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; color: #fff; }
+        .p-role { font-size: 1rem; color: #aaa; margin-top: 5px; font-weight: 300;}
+
+        /* --- POSITIONING THE MAP --- */
+        
+        /* CENTER: The Hub (Identity) */
+        .core-hub { top: 35%; left: 35%; width: 30%; height: auto; z-index: 100;}
+        .core-hub .p-name { font-size: 3rem; letter-spacing: -2px; line-height: 0.9;}
+
+        /* Branch: SKILLS (Floating Right) */
+        .branch-skills { top: 10%; right: 10%; width: 25%; }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;}
+        .skill-tag { 
+            font-family: var(--mono); font-size: 0.7rem; color: #000; font-weight: bold; 
+            background: var(--yellow); padding: 4px 8px; border-radius: 4px; 
+            transition: 0.2s;
+        }
+        .skill-tag:hover { background: #fff; transform: scale(1.1); }
+
+        /* Branch: PROJECTS (Floating Left) */
+        .branch-projects { top: 60%; left: 5%; width: 28%; height: 35vh; overflow-y: auto; }
+        .p-item { margin-bottom: 25px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;}
+        .p-item:hover .p-title { color: var(--yellow); }
+        .p-title { font-size: 1.4rem; font-weight: 800; transition: 0.2s;}
+        .p-desc { font-size: 0.85rem; color: #ccc; margin-top: 8px;}
+        .p-tech { font-family: var(--mono); font-size: 0.65rem; color: var(--text-dim); margin-top: 10px;}
+
+        /* Branch: CONTACT (Floating Bottom-Right) */
+        .branch-contact { bottom: 10%; right: 5%; text-align: right; }
+        .branch-contact h2 { font-size: 3rem; margin-bottom: 15px; color: #fff; }
+        .contact-links a {
+            display: inline-block;
+            font-family: var(--mono); font-size: 0.9rem; color: #fff; text-decoration: none; 
+            margin-left: 20px; transition: 0.3s; padding: 5px 0; border-bottom: 1px solid transparent;
+        }
+        .contact-links a:hover { color: var(--yellow); border-bottom-color: var(--yellow);}
+
+        @media (max-width: 900px) {
+            body { overflow-y: auto; }
+            .mind-map-canvas { height: auto; padding: 40px 5%; }
+            .node { position: static; width: 100%; margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nebula nebula-blue"></div>
+    <div class="nebula nebula-orange"></div>
+
+    <main class="mind-map-canvas">
+        
+        <header class="node core-hub">
+            <span class="label">NEURAL_MAP // SUBJECT_01</span>
+            <h1 class="p-name">YOUR NAME</h1>
+            <p class="p-role">Lead Frontend Engineer & Architecture Specialist</p>
+        </header>
+
+        <section class="node branch-skills">
+            <span class="label">Cognitive Toolkit</span>
+            <p style="color: var(--text-main); font-size: 1.1rem;">Optimized for complex UI challenges and low-latency rendering.</p>
+            <div class="skill-list">
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">Web3</span>
+                <span class="skill-tag">FastAPI</span>
+                <span class="skill-tag">Redis</span>
+                <span class="skill-tag">Docker</span>
+            </div>
+        </section>
+
+        <section class="node branch-projects">
+            <span class="label">Featured Outputs</span>
+            
+            <div class="p-item">
+                <h3 class="p-title">OmniSync Engine</h3>
+                <p class="p-desc">Architected a real-time distributed state management engine, eliminating data drift across multi-region edge nodes.</p>
+                <p class="p-tech">GO • WEBSOCKETS • AWS</p>
+            </div>
+
+            <div class="p-item">
+                <h3 class="p-title">Neural Mesh</h3>
+                <p class="p-desc">High-concurrency 3D WebGL interface for auditing neural network weights in production environments.</p>
+                <p class="p-tech">THREE.JS • PYTORCH • NEXT.JS</p>
+            </div>
+        </section>
+
+        <footer class="node branch-contact">
+            <span class="label">ESTABLISH_LINK</span>
+            <h2>Ready to Connect.</h2>
+            <div class="contact-links">
+                <a href="#">GITHUB_ID</a>
+                <a href="#">LINKEDIN_PROF</a>
+                <a href="mailto:email@mindmap.dev">EMAIL_INQ</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+</body>
+</html>

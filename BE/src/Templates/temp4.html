@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Chronicle: [FULL NAME]</title>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Georgia&family=IM+Fell+English:ital@0;1&family=News+Gothic+MT:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Authentic sepia tone paper from provided images */
+            --bg: #fdf5e6; 
+            --text: #1a1a1a; /* Soft black, not harsh */
+            --header: #000;
+            --accent: #d32f2f; /* Deep red for main headlines */
+            --muted: #666;
+            --glass: rgba(0,0,0,0.02);
+
+            --font-main: 'Georgia', serif;
+            --font-gothic: 'UnifrakturMaguntia', serif; /* The "Old English" title */
+            --font-head: 'IM Fell English', serif; /* The main story headlines */
+        }
+
+        /* --- Global Reset & Paper Feel --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); color: var(--text); font-family: var(--font-main); 
+            line-height: 1.6; overflow-x: hidden; padding: 2rem 5vw;
+        }
+
+        /* Authentic ink bleed effect */
+        ::selection { background: #000; color: var(--bg); }
+        h1, h2, h3 { font-family: var(--font-head); letter-spacing: -0.01em;}
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+
+        .chronicle-paper { max-width: 1400px; margin: 0 auto; position: relative; }
+
+        /* --- THE MASTHEAD (Matches image reference dense type) --- */
+        header { border-bottom: 2px solid #000; padding-bottom: 1rem; margin-bottom: 3rem; }
+        .masthead { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+        .chronicle-title { font-family: var(--font-gothic); font-size: 8rem; line-height: 0.8;}
+        .issue-date { text-align: right; opacity: 0.6; font-size: 0.8rem; }
+
+        .hero-headline { grid-column: 1 / span 12; display: grid; grid-template-columns: repeat(12, 1fr); margin-bottom: 3rem; gap: 20px;}
+        .hero-title { grid-column: 1 / span 8; font-size: 5rem; text-transform: uppercase; line-height: 0.9; margin-bottom: 1rem; }
+        .hero-desc { grid-column: 1 / span 6; font-size: 1.2rem; margin-bottom: 2rem; }
+        
+        .role-badge { grid-column: 9 / span 4; background: #000; color: #fff; padding: 2rem; font-weight: bold; font-size: 2rem; text-align: center; font-style: italic; font-family: 'Georgia', serif;}
+
+        /* --- TOOLKIT: THE EDITORIAL INDEX --- */
+        section { padding: 8rem 0; border-top: 1px solid rgba(0,0,0,0.1); }
+        .section-label { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; display: block; letter-spacing: 0.2em; font-weight: bold;}
+        
+        /* Skills in a data-table layout */
+        .skills-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; }
+        .skill-group h4 { font-size: 1rem; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; font-family: 'News Gothic MT', sans-serif;}
+        .skill-list { list-style: none; font-weight: 300; font-size: 1.2rem; }
+
+        /* --- PROJECTS: SELECTED STORIES --- */
+        .project-card { margin-bottom: 8rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem;}
+        
+        /* The main headline (Editorial Asymmetry) */
+        .project-meta { grid-column: 1 / span 2; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #000; padding-bottom: 1rem;}
+        .p-num { font-size: 0.8rem; color: var(--muted); font-family: 'News Gothic MT', sans-serif;}
+        .project-card h2 { font-family: var(--font-head); font-size: 3rem; text-transform: uppercase; line-height: 1;}
+        .project-card h2:hover { color: var(--accent); }
+
+        /* Story content */
+        .project-content { grid-column: 1 / span 2; margin-top: 2rem;}
+        .project-desc { font-size: 1.4rem; color: #333; margin-bottom: 2.5rem;}
+        
+        /* Monospace tech stack tag (authentic data spec feel) */
+        .project-tech { font-family: monospace; font-size: 0.8rem; color: #fff; background: #000; padding: 0.5rem 1rem; display: inline-block; }
+
+        /* --- THE CLASSIFIEDS: CONTACT PORT --- */
+        footer { padding: 4rem 0; border-top: 2px solid #000; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;}
+        .contact-details h3 { font-family: var(--font-gothic); font-size: 3rem; margin-bottom: 1rem; }
+        .contact-details p { font-style: italic; color: #555; margin-bottom: 2rem; }
+        .contact-links a { color: var(--text); font-weight: bold; display: block; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .contact-links a:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <div class="chronicle-paper">
+        <header>
+            <div class="masthead">
+                <div class="chronicle-title">Chroniclë</div>
+                <div class="issue-date">THE [YOUR INITIALS] REPORT // VOL. XIV <br>v.2026.04 :: Platform Status: ACTIVE</div>
+            </div>
+            
+            <div class="hero-headline">
+                <h1 class="hero-title">[Your Full Name]</h1>
+                <p class="hero-desc">Brings Technical Precision to Complex Product Challenges.</p>
+                <div class="role-badge">Staff ML Engineer & Data Architect</div>
+            </div>
+        </header>
+
+        <section id="toolkit">
+            <span class="section-label">Editorial Index: Engineering</span>
+            <div class="skills-index">
+                <div class="skill-group">
+                    <h4>Core Languages</h4>
+                    <ul class="skill-list">
+                        <li>Python (ML Core)</li>
+                        <li>TypeScript</li>
+                        <li>Go</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Frameworks</h4>
+                    <ul class="skill-list">
+                        <li>React / Next.js</li>
+                        <li>Node.js / FastAPI</li>
+                        <li>PyTorch / TensorFlow</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4>Environment</h4>
+                    <ul class="skill-list">
+                        <li>AWS (Cloud Native)</li>
+                        <li>Docker / K8s</li>
+                        <li>Git Architecture</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="works">
+            <span class="section-label">Selected Front Page Stories</span>
+
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="p-num">01 / FINTECH_CORE // 2026.04</span>
+                    <h2>Project Alpha Title</h2>
+                </div>
+                <div class="project-content">
+                    <p class="project-desc">Eliminated a 3s latency hurdle by rebuilding the real-time synchronization engine in Go, restoring system performance.</p>
+                    <div class="project-tech">Go • gRPC • PostgreSQL</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-meta">
+                    <span class="p-num">02 / OPEN_SOURCE // 2026.04</span>
+                    <h2>Project Beta Title</h2>
+                </div>
+                <div class="project-content">
+                    <p class="project-desc">A new, contribution-focused tool that maps infrastructure dependencies across multi-cloud deployments, preventing outages.</p>
+                    <div class="project-tech">React • Python • AWS Lambda</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="contact-details">
+                <h3>Contact Port</h3>
+                <p>Establishes Connection. Signal Status: Optimal.</p>
+            </div>
+            <div class="contact-links">
+                <a href="#">EMAIL</a>
+                <a href="#">GITHUB</a>
+                <a href="#">LINKEDIN</a>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

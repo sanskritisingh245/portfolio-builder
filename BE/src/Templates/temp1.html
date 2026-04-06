@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | System Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #f0f0f0;
+            --accent: #00ff41; /* Terminal Green for a technical feel */
+            --muted: #888;
+            --serif: 'Playfair Display', serif;
+            --sans: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- HERO SECTION --- */
+        header { height: 80vh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 5vh; }
+        .role-badge { color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1rem; display: block; }
+        h1 { font-family: var(--serif); font-size: clamp(3rem, 10vw, 7rem); line-height: 0.9; margin-bottom: 2rem; }
+        .contact-fast { display: flex; gap: 2rem; font-size: 0.8rem; text-transform: uppercase; opacity: 0.6; }
+        .contact-fast a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; }
+        .contact-fast a:hover { border-bottom: 1px solid var(--accent); opacity: 1; }
+
+        /* --- SKILLS SECTION --- */
+        section { padding: 8rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .label { font-size: 0.7rem; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; display: block; }
+        
+        .skills-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .skill-group h3 { font-size: 0.8rem; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        .skill-list { list-style: none; font-weight: 400; font-size: 1.1rem; }
+
+        /* --- PROJECTS SECTION --- */
+        .project-card { margin-bottom: 6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .project-num { font-family: var(--serif); font-size: 4rem; opacity: 0.1; font-style: italic; }
+        .project-content h2 { font-family: var(--serif); font-size: 2.5rem; margin-bottom: 1rem; }
+        .project-desc { font-size: 1.2rem; margin-bottom: 1.5rem; color: #ccc; }
+        .project-tech { font-family: monospace; font-size: 0.9rem; color: var(--accent); background: rgba(0,255,65,0.05); padding: 0.5rem 1rem; display: inline-block; }
+
+        /* --- FOOTER --- */
+        footer { padding: 4rem 0; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.5; font-size: 0.8rem; }
+
+        @media (max-width: 850px) {
+            .project-card { grid-template-columns: 1fr; gap: 1rem; }
+            h1 { font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <span class="role-badge">Full-Stack Software Engineer</span>
+            <h1>[Your Full Name]</h1>
+            <div class="contact-fast">
+                <a href="mailto:your@email.com">Email</a>
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Resume</a>
+            </div>
+        </header>
+
+        <section id="skills">
+            <span class="label">Technical Ledger</span>
+            <div class="skills-table">
+                <div class="skill-group">
+                    <h3>Languages</h3>
+                    <ul class="skill-list">
+                        <li>TypeScript</li>
+                        <li>Python</li>
+                        <li>Go</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h3>Frameworks</h3>
+                    <ul class="skill-list">
+                        <li>React / Next.js</li>
+                        <li>Node.js</li>
+                        <li>FastAPI</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h3>Tools & Platforms</h3>
+                    <ul class="skill-list">
+                        <li>AWS / Docker</li>
+                        <li>PostgreSQL</li>
+                        <li>Git & GitHub</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <span class="label">Selected Solutions</span>
+
+            <div class="project-card">
+                <div class="project-num">01</div>
+                <div class="project-content">
+                    <h2>Project Alpha Title</h2>
+                    <p class="project-desc">Automated [Problem] by building a [Solution] that reduced [Metric] by 40%.</p>
+                    <div class="project-tech">Next.js • Redis • AWS Lambda</div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-num">02</div>
+                <div class="project-content">
+                    <h2>Project Beta Title</h2>
+                    <p class="project-desc">A real-time synchronization engine that solves data latency issues in distributed systems.</p>
+                    <div class="project-tech">Go • gRPC • PostgreSQL</div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <span>© 2026 [Your Name]</span>
+            <span>Designed for Performance</span>
+        </footer>
+    </div>
+
+</body>
+</html>

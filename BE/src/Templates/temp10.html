@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether-Rose // [YOUR NAME]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;800&family=Quicksand:wght@300;600&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* REINTRODUCING PINK & BLUE DYNAMICS */
+            --mana-pink: #ffafbd; /* The pink you wanted back */
+            --mana-blue: #2193b0; 
+            --ether-navy: #0a192f;
+            --glass-bg: rgba(255, 255, 255, 0.5);
+            --border-glow: rgba(255, 175, 189, 0.3); /* Pink tinted glow */
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Quicksand', sans-serif; 
+            background: #fff; 
+            color: var(--ether-navy);
+            overflow-x: hidden;
+        }
+
+        /* --- DYNAMIC BACKGROUND (Pink & Blue Orbs) --- */
+        .scenery {
+            position: fixed; width: 100vw; height: 100vh; z-index: -1;
+            background: radial-gradient(circle at 0% 0%, #fff 0%, #f0f4f8 100%);
+        }
+        .orb {
+            position: absolute; width: 45vw; height: 45vw; border-radius: 50%;
+            filter: blur(120px); opacity: 0.3; animation: drift 25s infinite alternate;
+        }
+        .orb-pink { background: var(--mana-pink); top: -10%; right: -5%; }
+        .orb-blue { background: var(--mana-blue); bottom: -10%; left: -5%; animation-delay: -7s; }
+
+        @keyframes drift {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(-10%, 10%) scale(1.1); }
+        }
+
+        /* --- STAGE LAYOUT --- */
+        .stage {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 80px 5vw; position: relative;
+        }
+
+        /* --- GLASS PANEL (Magic Vellum) --- */
+        .panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 2px solid #fff;
+            border-radius: 40px;
+            padding: 80px;
+            width: 100%; max-width: 1200px;
+            box-shadow: 0 40px 100px rgba(255, 175, 189, 0.15); /* Pink shadow */
+            transition: var(--transition);
+        }
+        .panel:hover { border-color: var(--mana-pink); transform: translateY(-5px); }
+
+        /* --- TYPOGRAPHY --- */
+        .hero-name {
+            font-family: 'Cinzel', serif; font-size: clamp(3rem, 10vw, 7rem);
+            line-height: 0.85; margin-bottom: 25px; letter-spacing: -3px;
+        }
+        .role-tag {
+            font-family: 'Space Mono', monospace; font-size: 0.9rem;
+            color: #fff; background: var(--ether-navy);
+            padding: 8px 18px; border-radius: 4px; display: inline-block;
+            letter-spacing: 3px; text-transform: uppercase;
+        }
+
+        /* --- PROJECT GRID --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 50px; }
+        .card {
+            background: rgba(255,255,255,0.4); border-radius: 30px; padding: 40px;
+            border: 1px solid transparent; transition: var(--transition);
+        }
+        .card:hover { 
+            background: #fff; border-color: var(--mana-pink); 
+            transform: scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .card h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 15px; }
+        .tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--mana-blue); margin-right: 12px; font-weight: 800; }
+
+        /* --- CONTACT --- */
+        .btn-magic {
+            display: inline-block; padding: 20px 50px; border-radius: 100px;
+            background: var(--ether-navy); color: #fff; text-decoration: none;
+            font-family: 'Cinzel', serif; font-size: 1.2rem; transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.2);
+        }
+        .btn-magic:hover { background: var(--mana-pink); color: var(--ether-navy); transform: scale(1.1); }
+
+    </style>
+</head>
+<body>
+
+    <div class="scenery">
+        <div class="orb orb-pink"></div>
+        <div class="orb orb-blue"></div>
+    </div>
+
+    <section class="stage">
+        <div class="panel">
+            <p style="font-family: 'Space Mono'; font-size: 0.7rem; opacity: 0.5; margin-bottom: 15px;">REF_CHRONICLE // 2026</p>
+            <h1 class="hero-name">YOUR FULL<br>NAME</h1>
+            <div class="role-tag">Lead Full-Stack Engineer</div>
+            
+            <div style="margin-top: 50px; max-width: 700px;">
+                <p style="font-size: 1.3rem; font-weight: 300; line-height: 1.5;">Architecting digital realms with cinematic precision. Specializing in the intersection of high-scale performance and immersive visual storytelling.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stage">
+        <div class="panel">
+            <h2 style="font-family: 'Cinzel'; font-size: 3rem; margin-bottom: 40px;">Arcane Toolkit</h2>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px;">
+                <div>
+                    <p style="font-family: 'Space Mono'; color: var(--mana-pink); font-weight: 800; margin-bottom: 10px;">LANGUAGES & CORE</p>
+                    <p style="font-size: 1.1rem;">TypeScript, Go, Rust, Python, React, Next.js, Node.js</p>
+                </div>
+                <div>
+                    <p style="font-family: 'Space Mono'; color: var(--mana-blue); font-weight: 800; margin-bottom: 10px;">INFRA & MAGIC</p>
+                    <p style="font-size: 1.1rem;">AWS, Docker, Kubernetes, Terraform, Three.js, WebGL</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stage">
+        <div style="width: 100%; max-width: 1200px;">
+            <h2 style="font-family: 'Cinzel'; font-size: 3.5rem; text-align: center; margin-bottom: 50px;">Major Chronicles</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>OmniSync</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.8;">A real-time state engine resolving complex distributed data conflicts for 50k+ global users in flight.</p>
+                    <div><span class="tag">GO</span><span class="tag">REDIS</span><span class="tag">AWS</span></div>
+                </div>
+                <div class="card">
+                    <h3>Neural Mesh</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.8;">A browser-based 3D observability engine to audit machine learning weights in a visual production environment.</p>
+                    <div><span class="tag">THREE.JS</span><span class="tag">PYTORCH</span><span class="tag">NEXT.JS</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stage">
+        <div class="panel" style="text-align: center;">
+            <h2 style="font-family: 'Cinzel'; font-size: 3.5rem; margin-bottom: 40px;">Ready to Commence?</h2>
+            <a href="mailto:you@aether.dev" class="btn-magic">Summon the Architect</a>
+            <div style="margin-top: 60px;">
+                <a href="#" style="color: var(--ether-navy); font-family: 'Space Mono'; margin: 0 20px; text-decoration: none;">GITHUB_LOG</a>
+                <a href="#" style="color: var(--ether-navy); font-family: 'Space Mono'; margin: 0 20px; text-decoration: none;">LINKEDIN_SYNC</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
