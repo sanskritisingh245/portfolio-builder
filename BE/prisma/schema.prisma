@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
 }
-
+ 
 datasource db {
   provider = "postgresql"
 }
@@ -19,7 +19,7 @@ model User {
   name String
   email String @unique
   password String
-  //  chat   Chats[]
+   chat   Chats[]
   portfolio Portfolio[]
 }
 
@@ -33,9 +33,21 @@ model Portfolio{
   updatedAt DateTime @updatedAt
 }
 
-// model Chats {
-//   id String @id @default(uuid())
-//   userId String
-//   user  User @relation(fields: [userId], references: [id])
-//   chat String
-// }
+model Chats {
+  id String @id @default(uuid())
+  userId String
+  user  User @relation(fields: [userId], references: [id])
+  chatmessages ChatMessage[]
+}
+
+enum MessageOwner {
+  USER
+  AGENT
+}
+
+model ChatMessage {
+  id  String @id  @default(uuid())
+  type MessageOwner
+  chatId String
+  chat Chats @relation(fields: [chatId], references: [id])
+}
