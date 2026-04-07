@@ -1,6 +1,13 @@
 import { House, Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+type Chat = {
+    id:string
+    chatmessages:{
+        content:string
+    } []
+}
 
 export const Landing = () =>{
     return(
@@ -12,6 +19,28 @@ export const Landing = () =>{
 }
 
 export const SideBar = () =>{
+    const [chats, setChats]=useState<Chat[]>([]);
+    const [chatId , setChatId]=useState(()=> localStorage.getItem("chatId")) //lazy initialization becasue chatId only changes once so no need to re- read it again and again from the localstorage 
+
+    const token=localStorage.getItem("token") || "";
+
+    useEffect(()=>{
+        async function fetchChats(){
+            const res= await fetch("http://localhost:3000/chats",{
+                headers:{
+                    Authorization:token 
+                }
+            })
+            const data=await res.json()
+            setChats(data.chats)
+        }
+        fetchChats()
+    },[])
+
+    function handleClick(id:string){
+        localStorage.setItem("chatId", id)
+        setChatId(id);
+    }
     return(
         <div className="flex h-screen">
             <aside className="bg-black w-60 text-white animate-slide-left">
@@ -75,6 +104,19 @@ export const SideBar = () =>{
                     {/* history */}
                     <div className="pt-4">
                         <p className="text-gray-400">Recents</p>
+
+                        <div className="flex flex-col gap-2 mt-2">
+                            {chats.map((chat)=>(
+                                <div
+                                    key={chat.id}
+                                    onClick={()=> handleClick(chat.id)}
+                                    className={`px-3 py-2 rounded cursor-pointer text-sm transition
+                                    ${chatId === chat.id ? "bg-neutral-800" : "hover:bg-neutral-800"}`}
+                                >
+                                    {chat.chatmessages[0]?.content?.slice(0,25)+"..." || "New Chat"}
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
                 </div>
@@ -89,25 +131,43 @@ export const Main = () =>{
     const[loading, setLoading]=useState(false);
     const navigate= useNavigate();
 
+    const [chatId, setChatId]=useState(
+        localStorage.getItem("chatId")
+    );
     async function handleSubmit(){
-        alert("button was clicked")
+        //alert("button was clicked")
         setLoading(true);
+
         const res= await fetch("http://localhost:3000/generate",{
             method:"POST",
             headers:{
                 "Content-Type": "application/json"
             },
             body:JSON.stringify({
-                userInput:input
+                userInput:input,
+                chatId:chatId || null
             })
         }) 
+
         const data = await res.json()
         console.log(data)
+
+        if(!chatId && data.chatId){
+            setChatId(data.chatId)
+            localStorage.setItem("chatId", data.chatId)
+        }
+
         if(res.ok){
             navigate("/preview",{
                 state: data.code 
             })
+        }
+
+        if (!res.ok) {
+            console.error(data.msg)
+            return
         }   
+        setLoading(false);
     }
 
     function handleChange(e:React.ChangeEvent<HTMLInputElement>){
@@ -130,7 +190,7 @@ export const Main = () =>{
                     onChange={handleChange}
                 />
                  {/* ICON */}
-                <button onClick={handleSubmit}>
+                <button onClick={handleSubmit} disabled={loading}>
                     <svg
                         className="absolute right-4 top-1/2 -translate-y-1/2 mx-3 bg-neutral-800 rounded-full  size-6 text-gray-400 "
                         xmlns="http://www.w3.org/2000/svg"

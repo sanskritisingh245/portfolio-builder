@@ -27,6 +27,7 @@ export const SignIn = () => {
         })
         const data=await res.json();
         console.log(data);
+        localStorage.setItem("token", data.token)
         if(res.ok){
             navigate("/landing")
         }
