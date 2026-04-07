@@ -38,6 +38,8 @@ model Chats {
   userId String
   user  User @relation(fields: [userId], references: [id])
   chatmessages ChatMessage[]
+  createdAt DateTime @default(now())
+
 }
 
 enum MessageOwner {
@@ -48,6 +50,8 @@ enum MessageOwner {
 model ChatMessage {
   id  String @id  @default(uuid())
   type MessageOwner
+  content String
   chatId String
   chat Chats @relation(fields: [chatId], references: [id])
+  createdAt DateTime @default(now())
 }

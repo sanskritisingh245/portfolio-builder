@@ -12,6 +12,8 @@ dotenv.config({
 
 import { refinePrompt } from "../lib/ai/refine";
 import { generateStructuredPortfolio } from "../lib/ai/generate";
+import { authMiddleware } from "../lib/authMiddleware";
+import { success } from "zod";
 
 const JWT_SECRET=process.env.JWT_SECRET||"";
 
@@ -115,17 +117,102 @@ app.post("/signin", async (req:Request, res:Response)=>{
     }
 })
 
-app.post("/generate", async (req:Request, res:Response) => {
+app.post("/generate",authMiddleware , async (req:Request, res:Response) => {
     try{
-        const { userInput } = req.body;
-      
+        const { userInput , chatId } = req.body; 
+        const userId=req.id;
+        let currentId=chatId;
+
+        if(!chatId){
+            const chat=await prisma.chats.create({
+                data:{userId}
+            })
+            currentId=chat.id
+        }
+
+        await prisma.chatMessage.create({
+            data:{
+                chatId:currentId,
+                type:"USER",
+                content:userInput
+            }
+        })
+        
+        const history=await prisma.chatMessage.findMany({
+            where:{chatId:currentId},
+            orderBy:{createdAt:"asc"}
+        });
+
+        const message= history.map((msg)=>({
+            role:msg.type==="USER"?"user":"assistant",
+            content:msg.content
+        }))
+
         const refined = await refinePrompt(userInput)
         const portfolio = await generateStructuredPortfolio(refined)
       
+        await prisma.chatMessage.create({
+            data:{
+                chatId:currentId,
+                type:"AGENT",
+                content:portfolio
+            }
+        })
+
         return res.status(200).json({
           success: true,
             code:portfolio
         })
+    }catch(e:any){
+        return res.status(500).json({
+            success:false,
+            msg:e.message ||"Internal Server Error"
+        })
+    }
+})
+
+app.get("/chats", authMiddleware , async (req:Request, res:Response)=>{
+    try{
+        const userId=req.id;
+
+        const chats=await prisma.chats.findMany({
+            where:{userId},
+            orderBy:{createdAt:"desc"},
+            include:{
+                chatmessages:{
+                    take:1, 
+                    orderBy:{createdAt:"desc"}
+                }
+            }
+        })
+
+       res.status(200).json({
+            success:true,
+            chats
+        })
+
+    }catch(e:any){
+        return res.status(500).json({
+            success:false,
+            msg:e.message ||"Internal Server Error"
+        })
+    }
+})
+
+app.get("/messages/:chatId", authMiddleware, async(req:Request, res:Response)=>{
+    try{
+        const {chatId}= req.params;
+
+        const messages = await prisma.chatMessage.findMany({
+            where:{chatId},
+            orderBy:{createdAt:"asc"}
+        })
+
+        res.json({
+            success:true,
+            messages
+        })
+
     }catch(e:any){
         return res.status(500).json({
             success:false,
