@@ -22,13 +22,14 @@ export const SideBar = () =>{
     const [chats, setChats]=useState<Chat[]>([]);
     const [chatId , setChatId]=useState(()=> localStorage.getItem("chatId")) //lazy initialization becasue chatId only changes once so no need to re- read it again and again from the localstorage 
 
-    const token=localStorage.getItem("token") || "";
+    const token=JSON.parse(localStorage.getItem("token") || "");
+    console.log( "token from preview",token.data)
 
     useEffect(()=>{
         async function fetchChats(){
             const res= await fetch("http://localhost:3000/chats",{
                 headers:{
-                    Authorization:token 
+                    Authorization:token.data
                 }
             })
             const data=await res.json()
@@ -44,7 +45,7 @@ export const SideBar = () =>{
     return(
         <div className="flex h-screen">
             <aside className="bg-black w-60 text-white animate-slide-left">
-
+          
                 {/* icon */}
                 <div className="pb-5 my-3 mx-1.5 ">
                     <svg
@@ -134,6 +135,8 @@ export const Main = () =>{
     const [chatId, setChatId]=useState(
         localStorage.getItem("chatId")
     );
+    const token=JSON.parse(localStorage.getItem("token") || "");
+
     async function handleSubmit(){
         //alert("button was clicked")
         setLoading(true);
@@ -141,7 +144,8 @@ export const Main = () =>{
         const res= await fetch("http://localhost:3000/generate",{
             method:"POST",
             headers:{
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Authorization: token.data
             },
             body:JSON.stringify({
                 userInput:input,

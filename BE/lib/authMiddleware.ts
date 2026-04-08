@@ -14,7 +14,7 @@ declare global {
 
 export const authMiddleware=(req:Request, res:Response, next:NextFunction)=>{
     try{
-        console.log(req.headers)
+        //console.log(req.headers)
         const token= req.headers.authorization;
         console.log("asd", token)
         if(!token){
@@ -23,7 +23,7 @@ export const authMiddleware=(req:Request, res:Response, next:NextFunction)=>{
                 error:"token not found ehhh"
             })
         }
-        console.log("dsadas")
+        //console.log("dsadas")
         const decoded= jwt.verify(token,JWT_SECRET) as JwtPayload;
         if(!decoded){
             return res.status(500).json({
