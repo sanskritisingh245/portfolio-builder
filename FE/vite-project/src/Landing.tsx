@@ -42,6 +42,10 @@ export const SideBar = () =>{
         localStorage.setItem("chatId", id)
         setChatId(id);
     }
+
+    function newchatFunction(){
+        alert("new chat is opening ")
+    }
     return(
         <div className="flex h-screen">
             <aside className="bg-black w-60 text-white animate-slide-left">
@@ -75,10 +79,25 @@ export const SideBar = () =>{
 
                 {/* search features */}
                 <div className="flex flex-col">
-                    <div className="flex gap-2 pb-5 items-center">
-                        <House className="h-4"/>
-                        Home
+                        {/* new chat button */}
+                    <div  className="flex gap-2 pb-5 items-center">
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke-width="1.5" 
+                            stroke="currentColor" 
+                            className="size-5"
+                        >
+                            <path 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round" 
+                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" 
+                            />
+                        </svg>
+                        New chat
                     </div>
+                        {/* search button */}
                     <div className="flex gap-2 pb-5 items-center">
                         <Search className="h-4"/>
                         Search
@@ -88,6 +107,8 @@ export const SideBar = () =>{
                 {/* projects */}
                 <div>
                     <p className="text-gray-400 pb-5">Projects</p>
+
+                        {/* all project button */}
                     <div className="flex gap-2 pb-3">
                         <svg className="size-5"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
@@ -95,6 +116,7 @@ export const SideBar = () =>{
                         <p className="text-sm">All Projects</p>
                     </div>
 
+                        {/* Starred project button */}
                     <div className="flex gap-2 pb-3">
                         <svg className="size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
@@ -119,7 +141,6 @@ export const SideBar = () =>{
                             ))}
                         </div>
                     </div>
-
                 </div>
             </aside>
         </div>
