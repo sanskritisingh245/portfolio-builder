@@ -80,8 +80,8 @@ export const Main = () => {
         {/* ICON */}
         <button onClick={handleSubmit} disabled={loading}>
           {loading ? (
-                <div className="flex justify-center items-center h-screen">
-                <div className="w-10 h-10 border-4 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 mx-3">
+                  <div className="w-6 h-6 border-3 border-gray-300 border-t-transparent rounded-full animate-spin"></div>
                 </div>
             ) : (
                 <svg
