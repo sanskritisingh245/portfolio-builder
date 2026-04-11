@@ -5,9 +5,10 @@ import { Search } from "lucide-react";
 export const SideBar = () => {
   const [chats, setChats] = useState<Chat[]>([]);
   const [chatId, setChatId] = useState(() => localStorage.getItem("chatId")); //lazy initialization becasue chatId only changes once so no need to re- read it again and again from the localstorage
+  const [messages, setMessages]=useState([])
 
   const token = JSON.parse(localStorage.getItem("token") || "");
-  console.log("token from preview", token.data);
+  //console.log("token from preview", token.data);
 
   useEffect(() => {
     async function fetchChats() {
@@ -16,15 +17,28 @@ export const SideBar = () => {
           Authorization: token.data,
         },
       });
+
       const data = await res.json();
-      setChats(data.chats);
+
+      if(data?.chats){
+        setChats(data.chats);
+      }else{
+        setChats([])
+      }
     }
+    
     fetchChats();
-  }, []);
+  }, [token]);
 
   function handleClick(id: string) {
     localStorage.setItem("chatId", id);
     setChatId(id);
+  }
+
+  function handleNewchat(){
+    localStorage.removeItem("chatId");
+    setChatId(null)
+    setMessages([])
   }
 
   return (
@@ -59,8 +73,11 @@ export const SideBar = () => {
 
         {/* search features */}
         <div className="flex flex-col">
+
           {/* new chat button */}
-          <div className="flex gap-2 pb-5 items-center">
+          <div 
+            onClick={handleNewchat}
+            className="flex gap-2 pb-5 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -131,7 +148,7 @@ export const SideBar = () => {
             <p className="text-gray-400">Recents</p>
 
             <div className="flex flex-col gap-2 mt-2">
-              {chats.map((chat) => (
+              {chats?.map((chat) => (
                 <div
                   key={chat.id}
                   onClick={() => handleClick(chat.id)}
