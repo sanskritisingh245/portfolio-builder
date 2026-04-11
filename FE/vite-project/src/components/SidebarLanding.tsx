@@ -26,7 +26,7 @@ export const SideBar = () => {
         setChats([])
       }
     }
-    
+
     fetchChats();
   }, [token]);
 
@@ -97,7 +97,7 @@ export const SideBar = () => {
           {/* search button */}
           <div className="flex gap-2 pb-5 items-center">
             <Search className="h-4" />
-            Search
+            Search 
           </div>
         </div>
 
