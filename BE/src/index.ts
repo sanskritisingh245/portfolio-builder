@@ -1,4 +1,4 @@
-import express , {type Response, type Request} from "express";
+import express ,{type Response , type Request  } from "express";
 import cors from 'cors';
 import { SigninSchema, SignupSchema } from "../lib/zod/zod";
 import { prisma } from "./db";
@@ -201,7 +201,7 @@ app.get("/chats", authMiddleware , async (req:Request, res:Response)=>{
 
 app.get("/messages/:chatId", authMiddleware, async(req:Request, res:Response)=>{
     try{
-        const {chatId}= req.params;
+        const chatId= req.params.chatId as string;
 
         const messages = await prisma.chatMessage.findMany({
             where:{chatId},
