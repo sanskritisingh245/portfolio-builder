@@ -153,7 +153,7 @@ export const SideBar = () => {
                   key={chat.id}
                   onClick={() => handleClick(chat.id)}
                   className={`px-3 py-2 rounded cursor-pointer text-sm transition
-                                    ${chatId === chat.id ? "bg-neutral-800" : "hover:bg-neutral-800"}`}
+                    ${chatId === chat.id ? "bg-neutral-800" : "hover:bg-neutral-800"}`}
                 >
                   {chat.chatmessages[0]?.content?.slice(0, 25) + "..." ||
                     "New Chat"}

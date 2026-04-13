@@ -42,7 +42,7 @@ export const Editor = ({ code, setCode }: any) => {
     }
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(e:React.ChangeEvent<HTMLInputElement>) {
     setInput(e.target.value);
   }
 

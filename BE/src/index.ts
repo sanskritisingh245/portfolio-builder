@@ -13,7 +13,7 @@ dotenv.config({
 import { refinePrompt } from "../lib/ai/refine";
 import { generateStructuredPortfolio } from "../lib/ai/generate";
 import { authMiddleware } from "../lib/authMiddleware";
-import { success } from "zod";
+
 
 const JWT_SECRET=process.env.JWT_SECRET||"";
 
