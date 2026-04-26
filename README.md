@@ -1,6 +1,6 @@
 # Portfolio Builder
 
-An AI-powered portfolio builder. Describe yourself in plain English and get a ready-to-deploy portfolio site generated from a curated template catalog.
+An AI-powered portfolio builder. Describe yourself in plain English and get a ready generated from a curated template catalog.
 
 ## How it works
 
