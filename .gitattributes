@@ -1,0 +1,2 @@
+BE/src/Templates/*.html linguist-vendored
+*.html linguist-detectable=false
