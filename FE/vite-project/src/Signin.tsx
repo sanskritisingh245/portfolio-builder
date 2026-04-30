@@ -18,7 +18,7 @@ export const SignIn = () => {
     const navigate=useNavigate();
     async function handleSignin(){
         setLoading(true);
-        const res= await fetch("http://localhost:3000/signin",{
+        const res= await fetch(`${import.meta.env.VITE_API_URL ?? "http://localhost:3000"}/signin`,{
             method:"POST",
             headers:{
                 "content-Type":"application/json"

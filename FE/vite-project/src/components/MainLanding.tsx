@@ -14,7 +14,7 @@ export const Main = () => {
     setLoading(true);
     console.log("generating from landing ===");
     try {
-      const res = await fetch("http://localhost:3000/generate", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL ?? "http://localhost:3000"}/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

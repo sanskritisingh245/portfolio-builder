@@ -1,14 +1,10 @@
+import "dotenv/config";
 import express ,{type Response , type Request  } from "express";
 import cors from 'cors';
 import { SigninSchema, SignupSchema } from "../lib/zod/zod";
 import { prisma } from "./db";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
-
-import dotenv from "dotenv"
-dotenv.config({
-    path: "../.env"  
-})
 
 import { refinePrompt } from "../lib/ai/refine";
 import { generateStructuredPortfolio } from "../lib/ai/generate";
@@ -20,7 +16,7 @@ const JWT_SECRET=process.env.JWT_SECRET||"";
 const app= express();
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: process.env.FRONTEND_ORIGIN ?? "http://localhost:5173",
   methods: ["GET", "POST"],
   credentials: true
 }))
@@ -221,6 +217,7 @@ app.get("/messages/:chatId", authMiddleware, async(req:Request, res:Response)=>{
     }
 })
 
-app.listen(3000,()=>{
-    console.log("running on port 3000");
+const PORT = Number(process.env.PORT) || 3000;
+app.listen(PORT, () => {
+    console.log(`running on port ${PORT}`);
 })
