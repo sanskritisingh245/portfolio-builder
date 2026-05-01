@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Signup = () => {
-    const [ loading, setLoading]=useState(false);
+    const [, setLoading]=useState(false);
     const [credentials, setCredentails]=useState({
         name:"",
         email:"",

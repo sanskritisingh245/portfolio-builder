@@ -5,7 +5,7 @@ import { Search } from "lucide-react";
 export const SideBar = () => {
   const [chats, setChats] = useState<Chat[]>([]);
   const [chatId, setChatId] = useState(() => localStorage.getItem("chatId")); //lazy initialization becasue chatId only changes once so no need to re- read it again and again from the localstorage
-  const [messages, setMessages]=useState([])
+  const [, setMessages]=useState([])
 
   const token = JSON.parse(localStorage.getItem("token") || "");
   //console.log("token from preview", token.data);
