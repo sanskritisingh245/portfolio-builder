@@ -2,14 +2,13 @@ import { generateText } from "ai"
 import { TEMPLATE_LIBRARY } from "./templateCatalog"
 import { createOpenAI } from "@ai-sdk/openai"
 
-const openrouter = createOpenAI({
+const openai = createOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-  baseURL: "https://openrouter.ai/api/v1"
 })
 
 export const generateStructuredPortfolio = async (userInput:string) => {
   const { text } = await generateText({
-       model: openrouter("openrouter/auto"),
+       model: openai("gpt-4o-mini"),
        prompt: `You are a senior frontend developer who builds pixel-perfect portfolio websites. You have 10 reference templates to draw from.
 
 ## REFERENCE TEMPLATES

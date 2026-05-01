@@ -1,14 +1,13 @@
 import { generateText } from 'ai';
 import { createOpenAI } from "@ai-sdk/openai"
 
-const openrouter = createOpenAI({
+const openai = createOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-  baseURL: "https://openrouter.ai/api/v1"
 })
 
 export const refinePrompt = async(userInput:string)=>{
       const { text } = await generateText({
-        model: openrouter("openrouter/auto"),
+        model: openai("gpt-4o-mini"),
         prompt: `
           You are an expert portfolio strategist.
 
