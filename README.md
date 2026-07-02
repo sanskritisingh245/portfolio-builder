@@ -2,6 +2,13 @@
 
 An AI-powered portfolio builder. Describe yourself in plain English and get a ready generated from a curated template catalog.
 
+---
+
+
+https://github.com/user-attachments/assets/57d82f50-3d0d-4768-b4ad-abe1996ba99d
+
+
+
 ## How it works
 
 1. User signs in and sends a prompt describing their background, projects, and style preferences.
